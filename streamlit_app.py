@@ -1,7 +1,6 @@
 # Import python packages
 import streamlit as st
 import pandas as pd
-# streamlit.title('My Parents New Healthy Diner')
 from snowflake.snowpark.functions import col
 import requests
 
@@ -25,12 +24,13 @@ my_dataframe = session.table('smoothies.public.fruit_options').select(col('SEARC
 
 # Convert the Snowpark Dataframe to a Pandas Dataframe so we can use the LOC function
 pd_df=my_dataframe.to_pandas()
-st.dataframe(pd_df)
-st.stop()
+# st.dataframe(pd_df)
+# st.stop()
 
 ingredients_list = st.multiselect(
     'Choose up to 5 ingredients:'
     , my_dataframe
+    , max_selections=5
 )
 
 if ingredients_list:
